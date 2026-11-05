@@ -23,9 +23,6 @@ jobs:
       - name: Gradle kur
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Android SDK kur
-        uses: android-actions/setup-android@v3
-
       - name: APK oluştur
         run: gradle assembleDebug
 
