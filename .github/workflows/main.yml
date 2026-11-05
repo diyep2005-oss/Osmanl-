@@ -1,3 +1,28 @@
+name: Osmanli Tarayici APK Derle
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Depoyu indir
+        uses: actions/checkout@v4
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+
 
 name: Osmanli Tarayici APK Derle
 
@@ -27,6 +52,16 @@ jobs:
       - name: Android SDK kur
         uses: android-actions/setup-android@v3
 
+      - name: APK oluştur
+        run: gradle assembleDebug
+
+      - name: APK dosyasını yükle
+        uses: actions/upload-artifact@v4
+        with:
+          name: Osmanli-Tarayici-APK
+          path: app/build/outputs/apk/debug/*.apk
+          
+      
       - name: APK oluştur
         run: gradle assembleDebug
 
