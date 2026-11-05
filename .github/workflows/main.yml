@@ -25,13 +25,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
-
-      - name: Projeyi kontrol et
-        run: |
-          ls -la
-          ls -la Osmanli-T17'arayici
-          ls -la Osmanli-Tarayici/app
-
+          
       - name: APK oluştur
         working-directory: Osmanli-Tarayici
         run: gradle assembleDebug
