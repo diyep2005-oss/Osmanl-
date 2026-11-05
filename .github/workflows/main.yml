@@ -1,3 +1,4 @@
+
 name: Osmanli Tarayici APK Derle
 
 on:
@@ -20,25 +21,35 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Gradle kur
+      - name: Android SDK kur
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 12266719
+          packages: |
+            platform-tools
+            platforms;android-35
+            build-tools;35.0.0
+          accept-android-sdk-licenses: true
+
+      - name: Gradle 8.9 kur
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Projeyi kontrol et
+        run: |
+          ls -la
+          ls -la Osmanli-Tarayici
+          ls -la Osmanli-Tarayici/app
 
       - name: APK oluştur
+        working-directory: Osmanli-Tarayici
         run: gradle assembleDebug
 
       - name: APK dosyasını yükle
         uses: actions/upload-artifact@v4
         with:
           name: Osmanli-Tarayici-APK
-          path: app/build/outputs/apk/debug/*.apk
-          
-      
-      - name: APK oluştur
-        run: gradle assembleDebug
-
-      - name: APK dosyasını yükle
-        uses: actions/upload-artifact@v4
-        with:
-          name: Osmanli-Tarayici-APK
-          path: app/build/outputs/apk/debug/*.apk
+          path: Osmanli-Tarayici/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
           
