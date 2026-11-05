@@ -1,0 +1,2 @@
+# Osmanl-
+Osmanlı tarzı tarayıcı
